@@ -1,0 +1,59 @@
+{
+  "name": "babel-plugin-jsx-to-display-string",
+  "version": "0.0.1",
+  "description": "A Babel plugin to implement Vue-like toDisplayString functionality for React JSX/TSX and Vue JSX/TSX",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "homepage": "https://github.com/w2xi/babel-plugin-jsx-to-display-string#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w2xi/babel-plugin-jsx-to-display-string.git"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "import": "./dist/runtime.js",
+      "require": "./dist/runtime.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "npm run build",
+    "build": "tsup src --dts --format cjs,esm --watch",
+    "start:react": "cd packages/react-playground && npm run dev",
+    "start:vue": "cd packages/vue-playground && npm run dev"
+  },
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "react",
+    "jsx",
+    "vue"
+  ],
+  "author": "w2xi",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/types": "^7.23.0",
+    "@types/babel__core": "^7.20.3",
+    "@types/node": "^20.8.6",
+    "tsup": "^8.4.0",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0"
+  }
+}
