@@ -31,10 +31,12 @@
     "dist"
   ],
   "scripts": {
-    "dev": "npm run build",
-    "build": "tsup src --dts --format cjs,esm --watch",
-    "start:react": "cd packages/react-playground && npm run dev",
-    "start:vue": "cd packages/vue-playground && npm run dev"
+    "prepublishOnly": "npm run build",
+    "dev": "tsup src --dts --format cjs,esm --watch --clean",
+    "build": "tsup src --dts --format cjs,esm --minify --clean",
+    "release": "bumpp --commit --push --tag && pnpm publish",
+    "start:react": "cd playground/react && npm run dev",
+    "start:vue": "cd playground/vue && npm run dev"
   },
   "keywords": [
     "babel",
@@ -50,6 +52,7 @@
     "@babel/types": "^7.23.0",
     "@types/babel__core": "^7.20.3",
     "@types/node": "^20.8.6",
+    "bumpp": "^10.1.0",
     "tsup": "^8.4.0",
     "typescript": "^5.2.2"
   },
