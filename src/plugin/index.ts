@@ -9,23 +9,14 @@ interface PluginOptions {
 /**
  * Babel plugin that transforms JSX expressions to use toDisplayString
  */
-export default function jsxToDisplayString(): PluginObj {
-  // Use a closure to save state, ensuring each file is imported only once
-  const processedFiles = new Set<string>();
+export default function jsxToDisplayString(opts: PluginOptions): PluginObj {
   
   return {
     name: 'jsx-to-display-string',
     visitor: {
       Program: {
         enter(path, state) {
-          // Get the current filename as a unique identifier
-          const filename = state.filename || 'unknown';
-          
-          if (processedFiles.has(filename)) {
-            return;
-          }
-          
-          const opts = state.opts as PluginOptions;
+          // const opts = state.opts as PluginOptions;
           const importSource = opts.importSource || 'babel-plugin-jsx-to-display-string/runtime';
           const functionName = opts.functionName || 'toDisplayString';
 
@@ -48,9 +39,6 @@ export default function jsxToDisplayString(): PluginObj {
             );
             path.unshiftContainer('body', importDeclaration);
           }
-
-          // Mark the file as processed
-          processedFiles.add(filename);
         }
       },
       JSXExpressionContainer(path, state) {
