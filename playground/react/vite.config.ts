@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import jsxToDisplayString from '../../dist/index.js';
+import jsxToDisplayString from 'babel-plugin-jsx-to-display-string';
+import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig({
   plugins: [
@@ -10,6 +11,7 @@ export default defineConfig({
           jsxToDisplayString()
         ]
       }
-    })
+    }),
+    Inspect()
   ]
 }); 

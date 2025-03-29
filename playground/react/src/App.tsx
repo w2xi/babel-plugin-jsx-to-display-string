@@ -26,7 +26,7 @@ const App: React.FC = () => {
   
   return (
     <div className="App">
-      <h1>JSX toDisplayString Demo</h1>
+      <h1>React toDisplayString Demo</h1>
       
       <h2>String:</h2>
       <div>{user.name}</div>
