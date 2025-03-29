@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-jsx-to-display-string",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Babel plugin to implement Vue-like toDisplayString functionality for React JSX/TSX and Vue JSX/TSX",
   "publishConfig": {
     "access": "public",
