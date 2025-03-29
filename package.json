@@ -32,8 +32,8 @@
   ],
   "scripts": {
     "prepublishOnly": "npm run build",
-    "dev": "tsup src --dts --format cjs,esm --watch --clean",
-    "build": "tsup src --dts --format cjs,esm --minify --clean",
+    "dev": "tsup src --dts --format cjs,esm --watch --treeshake",
+    "build": "tsup src --dts --format cjs,esm --minify --treeshake",
     "release": "bumpp --commit --push --tag && pnpm publish",
     "start:react": "cd playground/react && npm run dev",
     "start:vue": "cd playground/vue && npm run dev"
