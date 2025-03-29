@@ -32,8 +32,8 @@
   ],
   "scripts": {
     "prepublishOnly": "npm run build",
-    "dev": "tsup src --dts --format cjs,esm --watch --treeshake",
-    "build": "tsup src --dts --format cjs,esm --minify --treeshake",
+    "dev": "tsup src --dts --format cjs,esm --watch --clean --treeshake",
+    "build": "tsup src --dts --format cjs,esm --minify --clean --treeshake",
     "release": "bumpp --commit --push --tag && pnpm publish",
     "start:react": "cd playground/react && npm run dev",
     "start:vue": "cd playground/vue-jsx && npm run dev"
@@ -42,8 +42,7 @@
     "babel",
     "babel-plugin",
     "react",
-    "jsx",
-    "vue"
+    "vue-jsx"
   ],
   "author": "w2xi",
   "license": "MIT",
