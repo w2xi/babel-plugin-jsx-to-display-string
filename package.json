@@ -56,6 +56,8 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "@babel/core": "^7.0.0-0"
+    "@babel/types": "^7.0.0-0",
+    "@babel/core": "^7.0.0-0",
+    "@types/babel__core": "^7.20.3"
   }
 }
