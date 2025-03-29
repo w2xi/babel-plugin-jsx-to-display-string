@@ -1,5 +1,8 @@
 # babel-plugin-jsx-to-display-string 🚀
 
+> **Warning**
+> This project is a Work in Progress (WIP). Features and APIs are subject to change without notice.
+
 <div align="center">
 
 [![NPM version](https://img.shields.io/npm/v/babel-plugin-jsx-to-display-string.svg)](https://www.npmjs.com/package/babel-plugin-jsx-to-display-string)
