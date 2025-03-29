@@ -36,7 +36,7 @@
     "build": "tsup src --dts --format cjs,esm --minify --treeshake",
     "release": "bumpp --commit --push --tag && pnpm publish",
     "start:react": "cd playground/react && npm run dev",
-    "start:vue": "cd playground/vue && npm run dev"
+    "start:vue": "cd playground/vue-jsx && npm run dev"
   },
   "keywords": [
     "babel",
