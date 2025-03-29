@@ -9,29 +9,45 @@ interface PluginOptions {
 /**
  * Babel plugin that transforms JSX expressions to use toDisplayString
  */
-export default function jsxToDisplayString(opts: PluginOptions): PluginObj {
+export default function jsxToDisplayString(opts: PluginOptions = {}): PluginObj {
   
   return {
     name: 'jsx-to-display-string',
     visitor: {
       Program: {
-        enter(path, state) {
-          // const opts = state.opts as PluginOptions;
+        enter(path) {
           const importSource = opts.importSource || 'babel-plugin-jsx-to-display-string/runtime';
           const functionName = opts.functionName || 'toDisplayString';
 
+          // Check if the module has already defined toDisplayString
+          const hasFunctionDefined = path.scope.hasBinding(functionName);
+          
+          // Skip import if importSource is empty string (used to disable auto-imports)
+          if (importSource === '') {
+            return;
+          }
+          
           // Check if the import already exists
           let importExists = path.node.body.some(node => 
-            t.isImportDeclaration(node) && 
-            node.source.value === importSource && 
-            node.specifiers.some(spec => 
-              t.isImportSpecifier(spec) && 
-              t.isIdentifier(spec.imported) && 
-              spec.imported.name === functionName
-            )
+            (t.isImportDeclaration(node) && 
+             node.source.value === importSource && 
+             node.specifiers.some(spec => 
+               t.isImportSpecifier(spec) && 
+               t.isIdentifier(spec.imported) && 
+               spec.imported.name === functionName
+             )) ||
+            // Also check for variable or function declarations with the same name
+            (t.isVariableDeclaration(node) &&
+             node.declarations.some(decl => 
+               t.isIdentifier(decl.id) && 
+               decl.id.name === functionName
+             )) ||
+            (t.isFunctionDeclaration(node) &&
+             t.isIdentifier(node.id) &&
+             node.id.name === functionName)
           );
 
-          if (!importExists) {
+          if (!importExists && !hasFunctionDefined) {
             // Add import statement for toDisplayString
             const importDeclaration = t.importDeclaration(
               [t.importSpecifier(t.identifier(functionName), t.identifier(functionName))],
@@ -41,8 +57,7 @@ export default function jsxToDisplayString(opts: PluginOptions): PluginObj {
           }
         }
       },
-      JSXExpressionContainer(path, state) {
-        const opts = state.opts as PluginOptions;
+      JSXExpressionContainer(path) {
         const functionName = opts.functionName || 'toDisplayString';
 
         // Skip JSX attributes or spread expressions
